@@ -14,9 +14,13 @@ import {
   Input,
   Form,
 } from "reactstrap";
+
+import { useSelector } from "react-redux";
 //For form validation using react-hook-form
 
 const Register = () => {
+  const userList = useSelector((state) => state.users.value);
+
   const {
     register,
 
@@ -79,6 +83,34 @@ const Register = () => {
           </Col>
         </Row>
       </Form>
+      <Row>
+        <Col md={6}>
+          <h2>List of Users</h2>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userList.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.email}</td>
+                  <td>{user.name}</td>
+                  <td>{user.password}</td>
+                  <td>
+                    <Button color="success">Update</Button>{" "}
+                    <Button color="danger">Delete</Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Col>
+      </Row>
     </Container>
   );
 };

@@ -34,7 +34,7 @@ app.post("/registerUser", async (req, res) => {
     await user.save();
     res.send({ user: user, msg: "Added." });
   } catch (error) {
-    //res.status(500).json({ error: "An error occurred" });
+    res.status(500).json({ error: "An error occurred" });
     console.log(error);
   }
 });
@@ -67,6 +67,11 @@ app.post("/login", async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+//POST API-logout
+
+app.post("/logout", async (req, res) => {
+  res.status(200).json({ message: "Logged out successfully" });
 });
 
 app.listen(3001, () => {

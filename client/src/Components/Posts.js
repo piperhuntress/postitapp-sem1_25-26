@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getPosts } from "../Features/PostSlice";
 import { Table } from "reactstrap";
 import moment from "moment";
+import { likePost } from "../Features/PostSlice";
 
 const Posts = () => {
   const posts = useSelector((state) => state.posts.posts);
@@ -11,6 +12,16 @@ const Posts = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleLikePost = (postId) => {
+    const postData = {
+      postId: postId,
+      email: email,
+    };
+
+    dispatch(likePost(postData));
+    navigate("/home");
+  };
 
   useEffect(() => {
     dispatch(getPosts());
